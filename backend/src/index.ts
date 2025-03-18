@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { recommendedProducts } from './dummyData';
+import { config } from './config';
 
 const app = express();
 const port = 3001;
@@ -32,9 +33,13 @@ app.get("/get-products-by-category", (req: Request, res: Response) => {
   return res.json(products);
 });
 
+// Exercise 3: add a feature flag that can be toggled with the .env file
 app.get("/unfinished-feature", (_: Request, res: Response) => {
-  // Oh no, this feature is not ready for production!
-  return res.status(500).send('Internal Server Error');
+  if (!config.unfinishedFeatureEnabled) {
+    return res.status(500).send('Oh no, this feature is not ready for production!');
+  }
+
+  return res.json({ message: "This is the unfinished feature enabled" });
 });
 
 app.listen(port, () => {
