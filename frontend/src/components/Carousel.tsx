@@ -10,6 +10,7 @@ import 'swiper/css/navigation'; // navigation module
 
 const Carousel = () => {
   const [products, setProducts] = useState<any[]>([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -18,12 +19,14 @@ const Carousel = () => {
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
-        setProducts([]);
+        setError(true);
       }
     };
-
+  
     fetchProducts();
   }, []);
+  
+  if (error || products.length === 0) return null; // Exercise 4: since the endpoint is unreliable, the recommended products is hidden if it fails.
 
   return (
     <div className="content-container">
