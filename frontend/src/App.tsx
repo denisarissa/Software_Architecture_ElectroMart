@@ -1,11 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './pages/Home';
-import Laptops from './pages/Laptops';
-import SSDs from './pages/SSDs';
-import Phones from './pages/Phones';
-import Playstations from './pages/Playstations';
 import Carousel from './components/Carousel';
+import Products from './pages/Products';
+import { ProductType } from './models/ProductType';
 import './App.css';
 
 const App = () => {
@@ -26,10 +24,10 @@ const App = () => {
         <Carousel />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/laptops" element={<Laptops />} />
-          <Route path="/ssds" element={<SSDs />} />
-          <Route path="/phones" element={<Phones />} />
-          <Route path="/playstations" element={<Playstations />} />
+          <Route path="/laptops" element={<Products productType={ProductType.Laptop} />} />
+          <Route path="/ssds" element={<Products productType={ProductType.SSD} />} />
+          <Route path="/phones" element={<Products productType={ProductType.Phone} />} />
+          <Route path="/playstations" element={<Products productType={ProductType.PlayStation} />} />
         </Routes>
       </div>
     </Router>
