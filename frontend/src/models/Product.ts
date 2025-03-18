@@ -1,11 +1,12 @@
 import { ProductType } from "./ProductType";
+import { config } from "../config";
 
 export class Product {
   public title: string;
   public imageUrl: string;
   public basePrice: number;
-  public taxRate: number = 1.25;
-  public discountRate: number = 0.15;
+  public taxRate: number = config.taxRate;
+  public discountRate: number = config.discountRate;
   public productType: ProductType; 
   
   // Exercise 1: since ProductType is the only different variable across product categories,

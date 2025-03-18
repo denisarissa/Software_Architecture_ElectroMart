@@ -6,7 +6,6 @@ import { ProductType } from '../models/ProductType';
   // Exercise 1: the pages are also duplicates across product categories,
   //  so the productType can just be passed as a prop.
 
-
 const Products = ({ productType }: { productType: ProductType }) => {
   const [listOfProducts, setProducts] = useState<Product[]>([]);
 
