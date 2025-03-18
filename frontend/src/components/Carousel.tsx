@@ -11,18 +11,25 @@ import 'swiper/css/navigation'; // navigation module
 const Carousel = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [error, setError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProducts = async (attempt = 1) => {
       try {
         const response = await axios.get('http://localhost:3001/get-product-recommendations');
         setProducts(response.data);
+        setError(false);
       } catch (error) {
-        console.error('Error fetching products:', error);
-        setError(true);
+        // Exercise 4: retry endpoint on failure
+        console.error(`Attempt ${attempt}: Error fetching products`, error);
+        if (attempt < 3) {
+          fetchProducts(attempt + 1);
+        } else {
+          setError(true);
+        }
       }
     };
-  
+
     fetchProducts();
   }, []);
   
